@@ -43,7 +43,8 @@ const Footer = () => {
     e.preventDefault();
     const email = e.target.email.value;
 
-    const res = await fetch('https://nytehawk-backend-7.onrender.com/api/subscribe', {
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const res = await fetch(`${apiUrl}/api/subscribe`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email }),

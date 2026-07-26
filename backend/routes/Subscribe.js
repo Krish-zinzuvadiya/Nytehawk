@@ -33,11 +33,9 @@ router.post('/api/subscribe', async (req, res) => {
 
   try {
     const existing = await Subscriber.findOne({ email });
-    if (existing) {
-      return res.status(409).json({ success: false, message: 'Email already subscribed.' });
+    if (!existing) {
+      await Subscriber.create({ email });
     }
-
-    await Subscriber.create({ email });
 
     // Send welcome email
     await transporter.sendMail({
@@ -45,31 +43,31 @@ router.post('/api/subscribe', async (req, res) => {
       to: email,
       subject: 'Thanks for subscribing to NyteHawk!',
       html: `
-  <div style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
-    <h2 style="font-size: 16px;">🚀 Welcome to the <strong>NyteHawk Family!</strong></h2>
-    <p>Thank you for subscribing. You’ll now receive our latest updates and news directly in your inbox.</p>
-
-    <h3 style="margin-top: 20px; color:#444;">✨ Features We Provide:</h3>
-    <ul style="line-height: 1.6; color: #555;">
-      <li>🏥 Best Hospitals</li>
-      <li>💊 Nearby Pharmacies</li>
-      <li>🍽️ Restaurants around you</li>
-      <li>🏧 ATMs at your service</li>
-      <li>⛽ Nearby Fuel Stations</li>
-      <li>🔜 And more upcoming features!</li>
-    </ul>
-
-    <p style="margin-top: 20px;">Regards,<br><strong>Team NyteHawk</strong></p>
-
-    <div style="margin-top: 25px;">
-      <a href="https://github.com/krishrami09" target="_blank" style="margin-right: 10px;">
-        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" width="24" height="24" />
-      </a>
-      <a href="https://www.instagram.com/krish_zinzuvadiya09" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="24" height="24" />
-      </a>
-    </div>
+<div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: auto; background-color: #0f172a; color: #f8fafc; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+  <div style="background: linear-gradient(135deg, #4f46e5, #9333ea); padding: 30px; text-align: center;">
+    <h1 style="margin: 0; color: #ffffff; font-size: 28px; letter-spacing: 1px;">Welcome to NyteHawk! 🦉</h1>
   </div>
+  <div style="padding: 40px 30px;">
+    <p style="font-size: 16px; color: #cbd5e1; line-height: 1.6;">Hello Night Owl,</p>
+    <p style="font-size: 16px; color: #cbd5e1; line-height: 1.6;">Thank you for subscribing to <strong>NyteHawk</strong>. We are thrilled to have you! You'll now be the first to know about our latest features, city expansions, and updates.</p>
+    
+    <div style="background: rgba(255, 255, 255, 0.05); border-left: 4px solid #a855f7; padding: 15px 20px; margin: 25px 0; border-radius: 4px;">
+      <h3 style="margin-top: 0; color: #f8fafc; font-size: 18px;">✨ What We Provide:</h3>
+      <ul style="color: #94a3b8; line-height: 1.8; margin-bottom: 0; padding-left: 20px;">
+        <li>🏥 <strong>Best Hospitals & Pharmacies</strong> when you need them.</li>
+        <li>🍽️ <strong>Late Night Food & Cafes</strong> to kill the hunger.</li>
+        <li>🏧 <strong>ATMs & Fuel Stations</strong> for your midnight runs.</li>
+      </ul>
+    </div>
+    
+    <p style="font-size: 16px; color: #cbd5e1; line-height: 1.6;">Stay safe and enjoy the night!</p>
+    <p style="font-size: 16px; color: #cbd5e1; margin-bottom: 0;"><strong>– Team NyteHawk</strong></p>
+  </div>
+  <div style="background-color: #0b1120; padding: 20px; text-align: center;">
+    <a href="https://github.com/krishrami09" style="text-decoration: none; margin: 0 10px; color: #9333ea; font-weight: bold;">🐙 GitHub</a>
+    <a href="https://instagram.com/krish_zinzuvadiya09" style="text-decoration: none; margin: 0 10px; color: #ec4899; font-weight: bold;">📸 Instagram</a>
+  </div>
+</div>
 `
     });
 
