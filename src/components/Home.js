@@ -258,11 +258,27 @@ const Home = () => {
     const fetchData = async () => {
       setLoadingPlaces(true);
       try {
-        const res = await fetch('https://overpass-api.de/api/interpreter', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `data=${encodeURIComponent(query)}`
-        });
+        const fetchFromOverpass = async (url) => {
+          return await fetch(url, {
+            method: 'POST',
+            headers: { 
+              'Accept': 'application/json',
+              'Content-Type': 'application/x-www-form-urlencoded' 
+            },
+            body: `data=${encodeURIComponent(query)}`
+          });
+        };
+
+        let res;
+        try {
+          res = await fetchFromOverpass('https://overpass-api.de/api/interpreter');
+          if (!res.ok) throw new Error('Primary server failed');
+        } catch (e) {
+          console.warn('Primary map server failed, trying backup...');
+          res = await fetchFromOverpass('https://lz4.overpass-api.de/api/interpreter');
+          if (!res.ok) throw new Error('Backup server failed');
+        }
+
         const data = await res.json();
         const points = (data.elements || [])
           .map((el) => {
@@ -286,7 +302,7 @@ const Home = () => {
         setNearbyPlaces(points);
       } catch (err) {
         console.error('Error fetching Overpass data:', err);
-        alert('Failed to load places. The map server might be busy or blocking requests. Please try again in a few moments.');
+        alert('Failed to load places. The map servers are currently busy or blocking requests due to high traffic. Please try again in 1-2 minutes.');
         setNearbyPlaces([]);
       } finally {
         setLoadingPlaces(false);
