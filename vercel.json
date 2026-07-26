@@ -19,6 +19,10 @@
       "destination": "/backend/Server.js"
     },
     {
+      "source": "/send-mail",
+      "destination": "/backend/Server.js"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
