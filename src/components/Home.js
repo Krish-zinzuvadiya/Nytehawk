@@ -278,11 +278,9 @@ const Home = () => {
           .filter((el) => el.lat && el.lon);
 
         setNearbyPlaces(points);
-        setLastFetchTime(new Date());
       } catch (err) {
         console.error('Error fetching Overpass data:', err);
         setNearbyPlaces([]);
-        setLastFetchTime(new Date());
       } finally {
         setLoadingPlaces(false);
       }
