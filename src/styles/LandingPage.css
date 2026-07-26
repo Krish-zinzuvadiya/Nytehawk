@@ -52,7 +52,7 @@ color: white;
 }
 
 .logo img {
-  max-height: 45px;
+  max-height: 80px;
   width: auto;
   object-fit: contain;
 }
