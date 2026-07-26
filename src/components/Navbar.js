@@ -31,7 +31,7 @@ const Navbar = () => {
 
         <div className="left-section">
           <a href="/home" className="logo-link">
-            <img src="/images/logo1.png" alt="NyteHawk Logo" className="logo" />
+            <img src="/images/logo.png" alt="NyteHawk Logo" className="logo" />
           </a>
         </div>
 
@@ -44,14 +44,14 @@ const Navbar = () => {
         </div>
 
         <button className="emergency-btn" onClick={openEmergency}>
-  <FiAlertTriangle className="alert-icon" />
-  <span>Emergency</span>
-</button>
+          <FiAlertTriangle className="alert-icon" />
+          <span>Emergency</span>
+        </button>
 
 
-         <Link to="/profile" className="profile-btn">
-    <ion-icon name="person-circle-outline" class="icon-hover"></ion-icon>
-  </Link>
+        <Link to="/profile" className="profile-btn">
+          <ion-icon name="person-circle-outline" class="icon-hover"></ion-icon>
+        </Link>
       </div>
 
 
