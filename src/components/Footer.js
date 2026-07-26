@@ -1,7 +1,7 @@
 // Footer.js - Redesigned modern multi-column footer
 import React from 'react';
 import '../styles/Footer.css';
-import { FaGithub, FaLinkedin, FaInstagram, FaFacebookF, FaEnvelope, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebookF, FaTwitter } from 'react-icons/fa';
 
 const Footer = () => {
   const year = new Date().getFullYear();

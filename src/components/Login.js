@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const { selectedLocation, isPrime } = location.state || {};
+
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(true);
 

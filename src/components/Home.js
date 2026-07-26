@@ -172,7 +172,7 @@ const Home = () => {
   const [showMap, setShowMap] = useState(false);
   const [openGroups, setOpenGroups] = useState({});
   const [loadingPlaces, setLoadingPlaces] = useState(false);
-  const [lastFetchTime, setLastFetchTime] = useState(null);
+
   const [locationError, setLocationError] = useState('');
 
   // Live location state
