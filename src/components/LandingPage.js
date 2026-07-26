@@ -14,7 +14,7 @@ const LandingPage = () => {
     <>
     <div className="landing-container">
       <nav className="landing-navbar">
-        <div className="landing-logo-container"><img src="/images/logo1.png" alt="NyteHawk Logo" className="landing-logo-img" /></div>
+        <div className="logo"><img src="/images/logo1.png" alt="NyteHawk Logo" /></div>
         <div className="nav-buttons">
           <button onClick={() => navigate('/login')}>Login</button>
           <button className="get-started" onClick={() => navigate('/signup')}>Get Started</button>

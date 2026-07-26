@@ -3,7 +3,7 @@
   "name": "Nytehawk",
   "icons": [
     {
-      "src": "images/logo.png",
+      "src": "images/logo1.png",
       "sizes": "192x192 512x512",
       "type": "image/png",
       "purpose": "any maskable"
