@@ -258,9 +258,11 @@ const Home = () => {
     const fetchData = async () => {
       setLoadingPlaces(true);
       try {
-        const res = await fetch(
-          `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`
-        );
+        const res = await fetch('https://overpass-api.de/api/interpreter', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `data=${encodeURIComponent(query)}`
+        });
         const data = await res.json();
         const points = (data.elements || [])
           .map((el) => {
@@ -277,9 +279,14 @@ const Home = () => {
           })
           .filter((el) => el.lat && el.lon);
 
+        if (points.length === 0) {
+          console.warn('No places found for this category in the given range.');
+        }
+
         setNearbyPlaces(points);
       } catch (err) {
         console.error('Error fetching Overpass data:', err);
+        alert('Failed to load places. The map server might be busy or blocking requests. Please try again in a few moments.');
         setNearbyPlaces([]);
       } finally {
         setLoadingPlaces(false);

@@ -42,7 +42,8 @@ const Login = () => {
 
     // Try API login
     try {
-      const res = await axios.post('https://nytehawk-backend-7.onrender.com/api/login', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${apiUrl}/api/login`, {
         email,
         password,
       });
