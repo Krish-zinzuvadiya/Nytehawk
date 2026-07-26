@@ -139,7 +139,7 @@ const MapUpdater = ({ lat, lon }) => {
   const map = useMap();
   useEffect(() => {
     if (lat && lon) {
-      map.setView([lat, lon], 15);
+      map.flyTo([lat, lon], 15, { animate: true, duration: 1.5 });
     }
   }, [lat, lon, map]);
   return null;
@@ -484,6 +484,18 @@ const Home = () => {
             {/* optional warning overlay if live location message exists */}
             <LiveLocationOverlay message={locationError} />
 
+            {/* Loading Overlay */}
+            {loadingPlaces && (
+              <div style={{
+                position: 'absolute', top: '10px', left: '50%', transform: 'translateX(-50%)',
+                backgroundColor: '#10b981', color: 'white', padding: '8px 16px',
+                borderRadius: '20px', zIndex: 9999, fontWeight: 'bold',
+                boxShadow: '0 4px 10px rgba(0,0,0,0.2)', display: 'flex', alignItems: 'center', gap: '8px'
+              }}>
+                ⏳ Fetching nearby places...
+              </div>
+            )}
+
             <MapContainer
               center={[coords.lat, coords.lon]}
               zoom={14}
@@ -493,8 +505,8 @@ const Home = () => {
             >
               <ZoomControl position="bottomright" />
               <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&copy; OpenStreetMap contributors"
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                attribution="&copy; <a href='https://carto.com/attributions'>CARTO</a>"
               />
 
               {/* Keep MapUpdater inside MapContainer (safe use of useMap) */}

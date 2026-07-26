@@ -221,6 +221,55 @@ input,
   margin-top: 10px;
 }
 
+/* -------- RANGE SLIDER -------- */
+.range-slider {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  background: #1f2937;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.range-slider label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #f8fafc;
+}
+
+/* Custom Input Range */
+.range-slider input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #374151;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 5px 0 10px 0;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6366f1;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.range-slider input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #818cf8;
+}
+
 .category-filters {
   display: flex;
   flex-direction: column;
@@ -389,79 +438,47 @@ input,
     min-height: auto;
   }
 
-  .search-bar-container {
-  display: flex;
-  width: 108%;
-  margin-left: -10px;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-}
-
-.search-bar-container input{
-  
-}
-
-.search-input-wrapper {
-  position: relative;
-  flex: 1;
-}
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  margin-left: -4%;
-  transform: translateY(-50%);
-  color: #666;
-}
-
-.search-btn {
-  background: #6366f1;
-  border: none;
-  padding: 8px 18px;
-  margin-left: 0px;
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.search-btn:hover {
-  background-color: #4734b8;
-}
-
   .right-panel {
     order: 1; /* map goes on top */
     width: 100%;
-    height: 50vh; /* smaller map height for mobile */
+    height: 55vh; /* smaller map height for mobile */
   }
 
-  /* Search Bar */
+  /* Search Bar Fixes for Mobile */
   .search-bar-container {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
     gap: 8px;
-    padding: 8px 12px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 16px;
+    background: transparent;
+    border: none;
   }
 
-  .search-bar-container input {
+  .search-input-wrapper {
     width: 100%;
-    margin: 0;
+  }
+
+  .search-input-wrapper input {
+    width: 100%;
+    margin-left: 0;
     padding: 10px 12px 10px 36px;
-    font-size: 0.9rem;
+    background: #111827;
+    border: 1px solid #374151;
+  }
+
+  .search-icon {
+    left: 12px;
+    margin-left: 0;
   }
 
   .search-btn {
-    width: 100%; /* full width on mobile */
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  /* Dropdowns */
-  select {
-    font-size: 0.9rem;
-    padding: 8px 10px;
+    width: 100%;
+    margin-left: 0;
+    padding: 12px;
+    border-radius: 8px;
   }
 
   /* Category Buttons */
@@ -476,17 +493,6 @@ input,
     font-size: 0.85rem;
     padding: 0.5rem;
   }
-  
-  .search-bar-container {
-    width: 100% !important;
-    margin-left: 0 !important;
-  }
-
-  .search-input-wrapper input {
-    width: 100% !important;
-    margin-left: 0 !important;
-  }
-
 }
 
 /* Small Mobile (≤ 480px) */

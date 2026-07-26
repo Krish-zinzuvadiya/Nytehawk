@@ -1,34 +1,56 @@
 import React from 'react';
 import '../styles/Help.css';
+import { HelpCircle, MapPin, Globe, HeadphonesIcon } from 'lucide-react';
 
 const Help = () => {
   return (
     <div className="help-container">
-      <h1 className="h1"></h1>
+      <div className="help-header">
+        <div className="help-icon-wrapper"><HelpCircle size={48} /></div>
+        <h1 className="gradient-text">Need Help?</h1>
+        <p className="help-subtitle">We're here to answer your questions and guide you.</p>
+      </div>
 
-      <h2>Need Help?</h2>
-      <p>
-        NyteHawk helps you find essential services like ATMs, pharmacies, and food outlets during late-night hours.
-      </p>
+      <div className="help-content">
+        <p className="help-intro">
+          NyteHawk helps you find essential services like ATMs, pharmacies, and food outlets during late-night hours. Here are some common questions.
+        </p>
 
-      <h3>📍 Why aren’t we using your current location?</h3>
-      <p>
-        Many laptops and desktop browsers don’t support GPS-based geolocation. Since accurate location access is limited on such devices, we’ve designed NyteHawk to work using:
-      </p>
-      <ul>
-        <li>✅ Prime Localities (handpicked zones in Ahmedabad)</li>
-        <li>✅ Pincode search (for more specific targeting)</li>
-      </ul>
+        <div className="faq-grid">
+          <div className="faq-card">
+            <div className="faq-icon"><MapPin size={24} /></div>
+            <div className="faq-text">
+              <h3>Why aren’t we using your current location?</h3>
+              <p>
+                Many laptops and desktop browsers don’t support precise GPS-based geolocation. Since accurate location access is limited on such devices, we’ve designed NyteHawk to work perfectly using:
+              </p>
+              <ul className="faq-list">
+                <li><span className="bullet-emoji">✅</span> Prime Localities (handpicked zones)</li>
+                <li><span className="bullet-emoji">✅</span> Pincode search (for specific targeting)</li>
+                <li><span className="bullet-emoji">✅</span> Mobile GPS (works great on phones!)</li>
+              </ul>
+            </div>
+          </div>
 
-      <h3>🗺️ Where is NyteHawk currently available?</h3>
-      <p>
-        NyteHawk currently works only in Ahmedabad. We're planning to expand to other cities soon. Stay tuned!
-      </p>
+          <div className="faq-card">
+            <div className="faq-icon"><Globe size={24} /></div>
+            <div className="faq-text">
+              <h3>Where is NyteHawk currently available?</h3>
+              <p>
+                NyteHawk is currently optimized for <strong>Ahmedabad</strong>. We are actively planning to expand our intelligent late-night mapping to other major cities soon. Stay tuned for updates!
+              </p>
+            </div>
+          </div>
+        </div>
 
-      <h3>💡 Need more support?</h3>
-      <p>
-        You can reach out via our <a href="/contact">Contact</a> page or email us at <strong>support@nytehawk.com</strong>.
-      </p>
+        <div className="help-support-card">
+          <div className="support-icon"><HeadphonesIcon size={32} /></div>
+          <h3>Still need support?</h3>
+          <p>
+            You can reach out via our <a href="/contact" className="highlight-link">Contact</a> page or email us directly at <strong>support@nytehawk.com</strong>.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

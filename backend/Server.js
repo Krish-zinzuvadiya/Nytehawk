@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -69,10 +71,14 @@ app.post('/api/signup', async (req, res) => {
             return res.status(400).json({ success: false, message: "User already exists" });
         }
 
-        const newUser = new User(req.body);
+        // Hash the password before saving
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+        const newUser = new User({ ...req.body, password: hashedPassword });
         await newUser.save();
 
-        res.json({ success: true, message: "Signup successful", user: newUser });
+        res.json({ success: true, message: "Signup successful" });
 
     } catch (err) {
         console.error("Signup Error:", err);
@@ -84,16 +90,28 @@ app.post('/api/signup', async (req, res) => {
 // ⭐ Login Route
 app.post('/api/login', async (req, res) => {
     try {
-        const user = await User.findOne({
-            email: req.body.email,
-            password: req.body.password
-        });
+        // Find user by email only
+        const user = await User.findOne({ email: req.body.email });
 
         if (!user) {
             return res.status(400).json({ success: false, message: "Invalid credentials" });
         }
 
-        res.json({ success: true, message: "Login successful", user });
+        // Verify password
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) {
+            return res.status(400).json({ success: false, message: "Invalid credentials" });
+        }
+
+        // Generate JWT token (using a dummy secret if not in env)
+        const jwtSecret = process.env.JWT_SECRET || 'fallback_secret_key_change_me_in_production';
+        const token = jwt.sign({ id: user._id, email: user.email }, jwtSecret, { expiresIn: '7d' });
+
+        // Exclude password from the returned user object
+        const userResponse = { ...user._doc };
+        delete userResponse.password;
+
+        res.json({ success: true, message: "Login successful", user: userResponse, token });
 
     } catch (err) {
         console.error("Login Error:", err);
@@ -132,5 +150,5 @@ app.get('/api/test', (req, res) => res.send("API is working!"));
 const PORT = process.env.PORT || 5000;
 // app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
-
-
+// Export the app for Vercel serverless deployment
+module.exports = app;
