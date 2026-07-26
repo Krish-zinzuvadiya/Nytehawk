@@ -44,14 +44,16 @@ border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 color: white;
 }
 
-.logo {
-  font-size: 1.6rem;
-  font-weight: bold;
- 
+.landing-logo-container {
+  display: flex;
+  align-items: center;
 }
 
-.logo span {
-  color: #fff;
+.landing-logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 .nav-buttons button {
@@ -317,16 +319,14 @@ color: white;
   align-items: center;
 }
   .landing-content h1 {
-    font-size: 200px;
+    font-size: 3rem;
   }
 
-  .logo {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-right: 20px;
-}
+  .landing-logo-img {
+    height: 38px;
+  }
   .landing-content p {
-    font-size: 200px;
+    font-size: 1.1rem;
   }
 
   .cta-buttons {
@@ -361,11 +361,9 @@ color: white;
     line-height: 1.3;
   }
 
-  .logo {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-right: 20px;
-}
+  .landing-logo-img {
+    height: 32px;
+  }
   
   .landing-content p {
     font-size: 0.95rem;
